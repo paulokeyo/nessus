@@ -44,7 +44,7 @@ Azure offers $200 free credits for the 1 month. We will use them for this lab
 5.	Once the VM is created, ensure you can RDP into it with the provided credentials.
 6.	After logging in, make the VM vulnerable:
      - Disable the Windows Firewall
-     - Gather up some Old Software
+     - Gather up some [Old Software](https://drive.google.com/drive/folders/1n83ilCjZWZulbDdYnUe9wQPK2buY47_U?usp=sharing)
      - Install an Old Version of FireFox: Firefox Setup 97.0b5
      - Install an Old Version of VLC Player: vlc-1.1.7-win32
      - Install an Old Version of Adobe Reader: 10.0_AdbeRdr1000_en_US_1_
