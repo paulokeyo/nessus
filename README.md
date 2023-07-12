@@ -62,7 +62,57 @@ Azure offers $200 free credits for the 1 month. We will use them for this lab
 8.	Once the scan is finished, click the scan name to see the vulnerabilities results.
 
 ### Make Configurations for Credentialed Scans (Within VM)
-<img src = ""/>
+<img src = "https://github.com/paulokeyo/nessus/blob/main/assets/edit%20registry.jpg?raw=true"/>
+
+1.	Disable Windows Firewall.
+2.	Disable User Account Control.
+3.	Enable Remote Registry.
+4.	Set Registry Key:
+     - Launch Registry Editor (regedit.exe) in "Run as administrator" mode.
+     - Navigate to HKEY_LOCAL_MACHINE hive.
+     - Open SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System key.
+     - Create a new DWORD (32-bit) value with the following properties:
+       - Name: LocalAccountTokenFilterPolicy
+       - Value: 1
+     - Close Registry Editor.
+5.	Restart the VM.
+
+### Make Configurations for Credentialed Scans (Nessus)
+<img src="https://github.com/paulokeyo/nessus/blob/main/assets/authenicated%20scan.jpg?raw=true"/>
+
+1.	Open the Nessus Essential web app and click on the scan we did earlier.
+2.	Click on “Configure”.
+3.	Under “Credentials” tab, select windows and input the your VM login credentials
+      - Username: azureuser  password: Vulscanner1@#$
+4.	Save.
+5.	Navigate back to “My scans”
+6.	Launch the scan
+
+### Execute Credentialed Scan against our Vulnerable Windows VM
+1.	Let the scan run to its completion
+2.	After the scan is complete, Click on scan name “Azure VMs scan”, then click on “History” tab. Notice the two scans in the history
+The first scan has 12 vulnerabilities while the second scan has 54 vulnerabilities
+
+<img src= "https://github.com/paulokeyo/nessus/blob/main/assets/12%20vulnerabilities.jpg?raw=true"/>
+
+<img src= "https://github.com/paulokeyo/nessus/blob/main/assets/56%20vulnerabilities.jpg?raw=true"/>
+
+### Remediate Vulnerabilities
+<img src = "https://github.com/paulokeyo/nessus/blob/main/assets/remediations.jpg?raw=true"/>
+
+1.	Log back into your Win10-Vulnerable VM.
+2.	Uninstall Adobe Reader, VLC Player, and Firefox.
+3.	Restart the VM.
+4.	Re-initiate the "Scan - Azure VMs Scan " scan and observe the results.
+
+### Verify Remediations
+<img src = "https://github.com/paulokeyo/nessus/blob/main/assets/remediated%20scan.jpg?raw=true"/>
+
+1.	Note that there are no longer Vulnerabilities for FireFox, VLC Player, or Adobe Reader!
+
+  - NOTE: Notice that we still have more Vulnerabilities (49) in the third scan after the remediation than the first scan. This is because we did not perform credentialed scan in the first scan (Credentailed scan provided Nessus more permissions and accesss into the VM). 
+Remediate the remaining vulnerabilities to make the VM more secure. 
+
 
 
 
